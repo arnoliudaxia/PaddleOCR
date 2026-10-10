@@ -1,0 +1,4459 @@
+{
+  "v5_mobile_latin": {
+    "model": "v5_mobile_latin",
+    "model_names": [
+      "PP-OCRv5_mobile_det",
+      "latin_PP-OCRv5_mobile_rec"
+    ],
+    "settings": {
+      "device": "gpu:0",
+      "engine": "paddle_static",
+      "engine_config": {
+        "run_mode": "paddle"
+      },
+      "use_doc_orientation_classify": false,
+      "use_doc_unwarping": false,
+      "use_textline_orientation": true
+    },
+    "pipeline_config": {
+      "SubModules": {
+        "TextDetection": {
+          "box_thresh": 0.6,
+          "limit_side_len": 64,
+          "limit_type": "min",
+          "max_side_limit": 4000,
+          "model_dir": null,
+          "model_name": "PP-OCRv5_mobile_det",
+          "module_name": "text_detection",
+          "thresh": 0.3,
+          "unclip_ratio": 1.5
+        },
+        "TextLineOrientation": {
+          "batch_size": 6,
+          "model_dir": null,
+          "model_name": "PP-LCNet_x1_0_textline_ori",
+          "module_name": "textline_orientation"
+        },
+        "TextRecognition": {
+          "batch_size": 6,
+          "model_dir": null,
+          "model_name": "latin_PP-OCRv5_mobile_rec",
+          "module_name": "text_recognition",
+          "score_thresh": 0.0
+        }
+      },
+      "SubPipelines": {
+        "DocPreprocessor": {
+          "SubModules": {
+            "DocOrientationClassify": {
+              "model_dir": null,
+              "model_name": "PP-LCNet_x1_0_doc_ori",
+              "module_name": "doc_text_orientation"
+            },
+            "DocUnwarping": {
+              "model_dir": null,
+              "model_name": "UVDoc",
+              "module_name": "image_unwarping"
+            }
+          },
+          "pipeline_name": "doc_preprocessor",
+          "use_doc_orientation_classify": false,
+          "use_doc_unwarping": false
+        }
+      },
+      "pipeline_name": "OCR",
+      "text_type": "general",
+      "use_doc_preprocessor": false,
+      "use_textline_orientation": true
+    },
+    "textline_orientation_model_name": "PP-LCNet_x1_0_textline_ori",
+    "versions": {
+      "paddle": "3.2.2",
+      "paddleocr": "3.7.0"
+    },
+    "model_files": {
+      "PP-OCRv5_mobile_det": {
+        "README.md": 16243,
+        "inference.json": 229777,
+        "inference.pdiparams": 4692937,
+        "config.json": 2871,
+        "inference.yml": 903,
+        ".gitattributes": 1575,
+        "postprocess": "DBPostProcess",
+        "dictionary_length": 0,
+        "dictionary_has_chinese": false
+      },
+      "latin_PP-OCRv5_mobile_rec": {
+        "README.md": 7085,
+        "inference.json": 217712,
+        "inference.pdiparams": 7965915,
+        "config.json": 17742,
+        "inference.yml": 6817,
+        ".gitattributes": 1575,
+        "postprocess": "CTCLabelDecode",
+        "dictionary_length": 836,
+        "dictionary_has_chinese": false
+      }
+    },
+    "warmup_frames": 7,
+    "rounds": 3,
+    "mean_ms": 202.580735553056,
+    "median_ms": 201.10804913565516,
+    "p95_ms": 221.0257719270885,
+    "records": [
+      {
+        "round": 0,
+        "frame": 0,
+        "ms": 201.10804913565516,
+        "detection_count": 36,
+        "recognition_count": 36,
+        "texts": [
+          "0",
+          "",
+          "=",
+          "4-1-",
+          "09/26",
+          "Siho",
+          "RiLO",
+          "5E28",
+          "6052",
+          "603",
+          "4-1-",
+          "?",
+          "0",
+          "g ",
+          "calGEEalrE",
+          "7197697",
+          "260",
+          "o",
+          "09/26",
+          "6028",
+          "4-1.",
+          "",
+          "¿",
+          ", ",
+          "BETTI",
+          "*",
+          "09",
+          "4-1-",
+          "09/29 ",
+          "SThO",
+          "4-1",
+          "204",
+          "EAN",
+          "",
+          "I",
+          "E"
+        ],
+        "numeric_texts": [
+          "0",
+          "=",
+          "4-1-",
+          "09/26",
+          "6052",
+          "603",
+          "4-1-",
+          "0",
+          "7197697",
+          "260",
+          "09/26",
+          "6028",
+          "4-1.",
+          ", ",
+          "*",
+          "09",
+          "4-1-",
+          "09/29 ",
+          "4-1",
+          "204"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 1,
+        "ms": 216.4288000203669,
+        "detection_count": 42,
+        "recognition_count": 42,
+        "texts": [
+          "079",
+          "N",
+          "ETLFI",
+          "833",
+          "7020",
+          "L-1-",
+          "CM",
+          "G",
+          "8E0",
+          "MDN",
+          "FEDRE1OO04",
+          "M",
+          "052",
+          "",
+          "0809",
+          "hu   m ",
+          "MI",
+          "9009",
+          "DCET",
+          "2P2106",
+          "-I-V",
+          "R00",
+          "whlen",
+          "4",
+          "D",
+          "C",
+          "2015",
+          "LO9900050",
+          "w00160d10",
+          "WO241",
+          "5",
+          "4-1",
+          "2.007",
+          "4",
+          "CE",
+          "2009",
+          "D4441",
+          "1-t",
+          "NOM",
+          "181 RESTE",
+          "EET",
+          "OW"
+        ],
+        "numeric_texts": [
+          "079",
+          "833",
+          "7020",
+          "052",
+          "0809",
+          "9009",
+          "4",
+          "2015",
+          "5",
+          "4-1",
+          "2.007",
+          "4",
+          "2009"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 2,
+        "ms": 203.95192876458168,
+        "detection_count": 38,
+        "recognition_count": 38,
+        "texts": [
+          "7065",
+          "I",
+          "A",
+          "",
+          "7036",
+          "",
+          "1d",
+          "w",
+          "SEAL",
+          "1WM",
+          "",
+          "7035",
+          "I",
+          "UCTTE",
+          "AR",
+          "",
+          "B",
+          "2UZO",
+          "AT",
+          "FHI",
+          "2003",
+          "D",
+          "01",
+          "2019",
+          "2023",
+          "1MA",
+          "H",
+          "T",
+          "2017",
+          "",
+          "h",
+          "N",
+          "19",
+          "tiri",
+          "1CT",
+          "PTR",
+          "XE",
+          "S"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7035",
+          "2003",
+          "01",
+          "2019",
+          "2023",
+          "2017",
+          "19"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 3,
+        "ms": 221.0257719270885,
+        "detection_count": 49,
+        "recognition_count": 49,
+        "texts": [
+          "eoct",
+          "a",
+          "ML",
+          "VumnV elve wrw",
+          "1V",
+          "2002",
+          "1wmma",
+          "02/00",
+          "Yobn  wwi",
+          "1V",
+          "S002",
+          "",
+          "106/00",
+          "1",
+          "LENN",
+          "SNEY",
+          " ",
+          "00/00",
+          "209",
+          "SEE",
+          "4-1",
+          "1p",
+          "104 00",
+          "NNY",
+          "S6",
+          "m, m",
+          "AURMRTI",
+          "F",
+          "MA",
+          "2038",
+          "AEY",
+          "imh",
+          " ",
+          "6202",
+          "Ame",
+          "2035",
+          "2016",
+          "VA",
+          "C00",
+          "1",
+          "ADIDLO PER",
+          ".",
+          "440",
+          "AA",
+          "ON.",
+          "2",
+          "",
+          "F5",
+          "S"
+        ],
+        "numeric_texts": [
+          "2002",
+          "02/00",
+          "106/00",
+          "1",
+          "00/00",
+          "209",
+          "4-1",
+          "2038",
+          "6202",
+          "2035",
+          "2016",
+          "1",
+          ".",
+          "440",
+          "2"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 4,
+        "ms": 192.18923710286617,
+        "detection_count": 34,
+        "recognition_count": 34,
+        "texts": [
+          "4UZO",
+          "19",
+          "CH",
+          "T1",
+          "",
+          "1M",
+          "2017",
+          "1M",
+          "L-",
+          "L-",
+          "2023",
+          "9C",
+          "th  ",
+          "IL",
+          "1",
+          "L",
+          "-",
+          "-",
+          "",
+          "",
+          "IM",
+          "To",
+          "E3",
+          "2010",
+          "L-",
+          "13C",
+          "M",
+          "2M",
+          "A",
+          "",
+          "008",
+          "A",
+          "C",
+          "53"
+        ],
+        "numeric_texts": [
+          "19",
+          "2017",
+          "2023",
+          "1",
+          "-",
+          "-",
+          "2010",
+          "008",
+          "53"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 5,
+        "ms": 181.81231571361423,
+        "detection_count": 20,
+        "recognition_count": 20,
+        "texts": [
+          "t",
+          "",
+          "",
+          "",
+          "",
+          "Nh ",
+          "M",
+          "2.004",
+          "",
+          "P",
+          "-",
+          "MRU",
+          "XA",
+          "",
+          "2005",
+          "",
+          "0",
+          "",
+          "J",
+          "0"
+        ],
+        "numeric_texts": [
+          "2.004",
+          "-",
+          "2005",
+          "0",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 6,
+        "ms": 194.34277014806867,
+        "detection_count": 21,
+        "recognition_count": 21,
+        "texts": [
+          "M78",
+          "autd",
+          "A",
+          "Q",
+          "",
+          "2",
+          "IAEN",
+          "",
+          "POLL",
+          "WwVLW",
+          "TNVO",
+          "WPU",
+          "FF7102",
+          "PA",
+          "VV",
+          "T",
+          "GOLL",
+          "I",
+          "4",
+          "R",
+          "0"
+        ],
+        "numeric_texts": [
+          "2",
+          "4",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 0,
+        "ms": 195.28772588819265,
+        "detection_count": 36,
+        "recognition_count": 36,
+        "texts": [
+          "0",
+          "",
+          "=",
+          "4-1-",
+          "09/26",
+          "Siho",
+          "RiLO",
+          "5E28",
+          "6052",
+          "603",
+          "4-1-",
+          "?",
+          "0",
+          "g ",
+          "calGEEalrE",
+          "7197697",
+          "260",
+          "o",
+          "09/26",
+          "6028",
+          "4-1.",
+          "",
+          "¿",
+          ", ",
+          "BETTI",
+          "*",
+          "09",
+          "4-1-",
+          "09/29 ",
+          "SThO",
+          "4-1",
+          "204",
+          "EAN",
+          "",
+          "I",
+          "E"
+        ],
+        "numeric_texts": [
+          "0",
+          "=",
+          "4-1-",
+          "09/26",
+          "6052",
+          "603",
+          "4-1-",
+          "0",
+          "7197697",
+          "260",
+          "09/26",
+          "6028",
+          "4-1.",
+          ", ",
+          "*",
+          "09",
+          "4-1-",
+          "09/29 ",
+          "4-1",
+          "204"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 1,
+        "ms": 215.4213492758572,
+        "detection_count": 42,
+        "recognition_count": 42,
+        "texts": [
+          "079",
+          "N",
+          "ETLFI",
+          "833",
+          "7020",
+          "L-1-",
+          "CM",
+          "G",
+          "8E0",
+          "MDN",
+          "FEDRE1OO04",
+          "M",
+          "052",
+          "",
+          "0809",
+          "hu   m ",
+          "MI",
+          "9009",
+          "DCET",
+          "2P2106",
+          "-I-V",
+          "R00",
+          "whlen",
+          "4",
+          "D",
+          "C",
+          "2015",
+          "LO9900050",
+          "w00160d10",
+          "WO241",
+          "5",
+          "4-1",
+          "2.007",
+          "4",
+          "CE",
+          "2009",
+          "D4441",
+          "1-t",
+          "NOM",
+          "181 RESTE",
+          "EET",
+          "OW"
+        ],
+        "numeric_texts": [
+          "079",
+          "833",
+          "7020",
+          "052",
+          "0809",
+          "9009",
+          "4",
+          "2015",
+          "5",
+          "4-1",
+          "2.007",
+          "4",
+          "2009"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 2,
+        "ms": 207.37722283229232,
+        "detection_count": 38,
+        "recognition_count": 38,
+        "texts": [
+          "7065",
+          "I",
+          "A",
+          "",
+          "7036",
+          "",
+          "1d",
+          "w",
+          "SEAL",
+          "1WM",
+          "",
+          "7035",
+          "I",
+          "UCTTE",
+          "AR",
+          "",
+          "B",
+          "2UZO",
+          "AT",
+          "FHI",
+          "2003",
+          "D",
+          "01",
+          "2019",
+          "2023",
+          "1MA",
+          "H",
+          "T",
+          "2017",
+          "",
+          "h",
+          "N",
+          "19",
+          "tiri",
+          "1CT",
+          "PTR",
+          "XE",
+          "S"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7035",
+          "2003",
+          "01",
+          "2019",
+          "2023",
+          "2017",
+          "19"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 3,
+        "ms": 220.42848076671362,
+        "detection_count": 49,
+        "recognition_count": 49,
+        "texts": [
+          "eoct",
+          "a",
+          "ML",
+          "VumnV elve wrw",
+          "1V",
+          "2002",
+          "1wmma",
+          "02/00",
+          "Yobn  wwi",
+          "1V",
+          "S002",
+          "",
+          "106/00",
+          "1",
+          "LENN",
+          "SNEY",
+          " ",
+          "00/00",
+          "209",
+          "SEE",
+          "4-1",
+          "1p",
+          "104 00",
+          "NNY",
+          "S6",
+          "m, m",
+          "AURMRTI",
+          "F",
+          "MA",
+          "2038",
+          "AEY",
+          "imh",
+          " ",
+          "6202",
+          "Ame",
+          "2035",
+          "2016",
+          "VA",
+          "C00",
+          "1",
+          "ADIDLO PER",
+          ".",
+          "440",
+          "AA",
+          "ON.",
+          "2",
+          "",
+          "F5",
+          "S"
+        ],
+        "numeric_texts": [
+          "2002",
+          "02/00",
+          "106/00",
+          "1",
+          "00/00",
+          "209",
+          "4-1",
+          "2038",
+          "6202",
+          "2035",
+          "2016",
+          "1",
+          ".",
+          "440",
+          "2"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 4,
+        "ms": 197.41143519058824,
+        "detection_count": 34,
+        "recognition_count": 34,
+        "texts": [
+          "4UZO",
+          "19",
+          "CH",
+          "T1",
+          "",
+          "1M",
+          "2017",
+          "1M",
+          "L-",
+          "L-",
+          "2023",
+          "9C",
+          "th  ",
+          "IL",
+          "1",
+          "L",
+          "-",
+          "-",
+          "",
+          "",
+          "IM",
+          "To",
+          "E3",
+          "2010",
+          "L-",
+          "13C",
+          "M",
+          "2M",
+          "A",
+          "",
+          "008",
+          "A",
+          "C",
+          "53"
+        ],
+        "numeric_texts": [
+          "19",
+          "2017",
+          "2023",
+          "1",
+          "-",
+          "-",
+          "2010",
+          "008",
+          "53"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 5,
+        "ms": 180.98274990916252,
+        "detection_count": 20,
+        "recognition_count": 20,
+        "texts": [
+          "t",
+          "",
+          "",
+          "",
+          "",
+          "Nh ",
+          "M",
+          "2.004",
+          "",
+          "P",
+          "-",
+          "MRU",
+          "XA",
+          "",
+          "2005",
+          "",
+          "0",
+          "",
+          "J",
+          "0"
+        ],
+        "numeric_texts": [
+          "2.004",
+          "-",
+          "2005",
+          "0",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 6,
+        "ms": 199.0019641816616,
+        "detection_count": 21,
+        "recognition_count": 21,
+        "texts": [
+          "M78",
+          "autd",
+          "A",
+          "Q",
+          "",
+          "2",
+          "IAEN",
+          "",
+          "POLL",
+          "WwVLW",
+          "TNVO",
+          "WPU",
+          "FF7102",
+          "PA",
+          "VV",
+          "T",
+          "GOLL",
+          "I",
+          "4",
+          "R",
+          "0"
+        ],
+        "numeric_texts": [
+          "2",
+          "4",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 0,
+        "ms": 196.36914413422346,
+        "detection_count": 36,
+        "recognition_count": 36,
+        "texts": [
+          "0",
+          "",
+          "=",
+          "4-1-",
+          "09/26",
+          "Siho",
+          "RiLO",
+          "5E28",
+          "6052",
+          "603",
+          "4-1-",
+          "?",
+          "0",
+          "g ",
+          "calGEEalrE",
+          "7197697",
+          "260",
+          "o",
+          "09/26",
+          "6028",
+          "4-1.",
+          "",
+          "¿",
+          ", ",
+          "BETTI",
+          "*",
+          "09",
+          "4-1-",
+          "09/29 ",
+          "SThO",
+          "4-1",
+          "204",
+          "EAN",
+          "",
+          "I",
+          "E"
+        ],
+        "numeric_texts": [
+          "0",
+          "=",
+          "4-1-",
+          "09/26",
+          "6052",
+          "603",
+          "4-1-",
+          "0",
+          "7197697",
+          "260",
+          "09/26",
+          "6028",
+          "4-1.",
+          ", ",
+          "*",
+          "09",
+          "4-1-",
+          "09/29 ",
+          "4-1",
+          "204"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 1,
+        "ms": 218.05765572935343,
+        "detection_count": 42,
+        "recognition_count": 42,
+        "texts": [
+          "079",
+          "N",
+          "ETLFI",
+          "833",
+          "7020",
+          "L-1-",
+          "CM",
+          "G",
+          "8E0",
+          "MDN",
+          "FEDRE1OO04",
+          "M",
+          "052",
+          "",
+          "0809",
+          "hu   m ",
+          "MI",
+          "9009",
+          "DCET",
+          "2P2106",
+          "-I-V",
+          "R00",
+          "whlen",
+          "4",
+          "D",
+          "C",
+          "2015",
+          "LO9900050",
+          "w00160d10",
+          "WO241",
+          "5",
+          "4-1",
+          "2.007",
+          "4",
+          "CE",
+          "2009",
+          "D4441",
+          "1-t",
+          "NOM",
+          "181 RESTE",
+          "EET",
+          "OW"
+        ],
+        "numeric_texts": [
+          "079",
+          "833",
+          "7020",
+          "052",
+          "0809",
+          "9009",
+          "4",
+          "2015",
+          "5",
+          "4-1",
+          "2.007",
+          "4",
+          "2009"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 2,
+        "ms": 209.7252979874611,
+        "detection_count": 38,
+        "recognition_count": 38,
+        "texts": [
+          "7065",
+          "I",
+          "A",
+          "",
+          "7036",
+          "",
+          "1d",
+          "w",
+          "SEAL",
+          "1WM",
+          "",
+          "7035",
+          "I",
+          "UCTTE",
+          "AR",
+          "",
+          "B",
+          "2UZO",
+          "AT",
+          "FHI",
+          "2003",
+          "D",
+          "01",
+          "2019",
+          "2023",
+          "1MA",
+          "H",
+          "T",
+          "2017",
+          "",
+          "h",
+          "N",
+          "19",
+          "tiri",
+          "1CT",
+          "PTR",
+          "XE",
+          "S"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7035",
+          "2003",
+          "01",
+          "2019",
+          "2023",
+          "2017",
+          "19"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 3,
+        "ms": 226.0399437509477,
+        "detection_count": 49,
+        "recognition_count": 49,
+        "texts": [
+          "eoct",
+          "a",
+          "ML",
+          "VumnV elve wrw",
+          "1V",
+          "2002",
+          "1wmma",
+          "02/00",
+          "Yobn  wwi",
+          "1V",
+          "S002",
+          "",
+          "106/00",
+          "1",
+          "LENN",
+          "SNEY",
+          " ",
+          "00/00",
+          "209",
+          "SEE",
+          "4-1",
+          "1p",
+          "104 00",
+          "NNY",
+          "S6",
+          "m, m",
+          "AURMRTI",
+          "F",
+          "MA",
+          "2038",
+          "AEY",
+          "imh",
+          " ",
+          "6202",
+          "Ame",
+          "2035",
+          "2016",
+          "VA",
+          "C00",
+          "1",
+          "ADIDLO PER",
+          ".",
+          "440",
+          "AA",
+          "ON.",
+          "2",
+          "",
+          "F5",
+          "S"
+        ],
+        "numeric_texts": [
+          "2002",
+          "02/00",
+          "106/00",
+          "1",
+          "00/00",
+          "209",
+          "4-1",
+          "2038",
+          "6202",
+          "2035",
+          "2016",
+          "1",
+          ".",
+          "440",
+          "2"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 4,
+        "ms": 195.78187866136432,
+        "detection_count": 34,
+        "recognition_count": 34,
+        "texts": [
+          "4UZO",
+          "19",
+          "CH",
+          "T1",
+          "",
+          "1M",
+          "2017",
+          "1M",
+          "L-",
+          "L-",
+          "2023",
+          "9C",
+          "th  ",
+          "IL",
+          "1",
+          "L",
+          "-",
+          "-",
+          "",
+          "",
+          "IM",
+          "To",
+          "E3",
+          "2010",
+          "L-",
+          "13C",
+          "M",
+          "2M",
+          "A",
+          "",
+          "008",
+          "A",
+          "C",
+          "53"
+        ],
+        "numeric_texts": [
+          "19",
+          "2017",
+          "2023",
+          "1",
+          "-",
+          "-",
+          "2010",
+          "008",
+          "53"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 5,
+        "ms": 176.6774752177298,
+        "detection_count": 20,
+        "recognition_count": 20,
+        "texts": [
+          "t",
+          "",
+          "",
+          "",
+          "",
+          "Nh ",
+          "M",
+          "2.004",
+          "",
+          "P",
+          "-",
+          "MRU",
+          "XA",
+          "",
+          "2005",
+          "",
+          "0",
+          "",
+          "J",
+          "0"
+        ],
+        "numeric_texts": [
+          "2.004",
+          "-",
+          "2005",
+          "0",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 6,
+        "ms": 204.77425027638674,
+        "detection_count": 21,
+        "recognition_count": 21,
+        "texts": [
+          "M78",
+          "autd",
+          "A",
+          "Q",
+          "",
+          "2",
+          "IAEN",
+          "",
+          "POLL",
+          "WwVLW",
+          "TNVO",
+          "WPU",
+          "FF7102",
+          "PA",
+          "VV",
+          "T",
+          "GOLL",
+          "I",
+          "4",
+          "R",
+          "0"
+        ],
+        "numeric_texts": [
+          "2",
+          "4",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      }
+    ],
+    "agreement_vs_v6_small_not_accuracy": [
+      {
+        "frame": 0,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 8,
+        "baseline_numeric_count": 13,
+        "current_numeric_count": 20
+      },
+      {
+        "frame": 1,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 4,
+        "baseline_numeric_count": 14,
+        "current_numeric_count": 13
+      },
+      {
+        "frame": 2,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 6,
+        "baseline_numeric_count": 11,
+        "current_numeric_count": 9
+      },
+      {
+        "frame": 3,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 5,
+        "baseline_numeric_count": 19,
+        "current_numeric_count": 15
+      },
+      {
+        "frame": 4,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 5,
+        "baseline_numeric_count": 8,
+        "current_numeric_count": 9
+      },
+      {
+        "frame": 5,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 0,
+        "baseline_numeric_count": 1,
+        "current_numeric_count": 5
+      },
+      {
+        "frame": 6,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 1,
+        "baseline_numeric_count": 6,
+        "current_numeric_count": 3
+      }
+    ]
+  },
+  "v6_small": {
+    "model": "v6_small",
+    "model_names": [
+      "PP-OCRv6_small_det",
+      "PP-OCRv6_small_rec"
+    ],
+    "settings": {
+      "device": "gpu:0",
+      "engine": "paddle_static",
+      "engine_config": {
+        "run_mode": "paddle"
+      },
+      "use_doc_orientation_classify": false,
+      "use_doc_unwarping": false,
+      "use_textline_orientation": true
+    },
+    "pipeline_config": {
+      "SubModules": {
+        "TextDetection": {
+          "box_thresh": 0.6,
+          "limit_side_len": 64,
+          "limit_type": "min",
+          "max_side_limit": 4000,
+          "model_dir": null,
+          "model_name": "PP-OCRv6_small_det",
+          "module_name": "text_detection",
+          "thresh": 0.3,
+          "unclip_ratio": 1.5
+        },
+        "TextLineOrientation": {
+          "batch_size": 6,
+          "model_dir": null,
+          "model_name": "PP-LCNet_x1_0_textline_ori",
+          "module_name": "textline_orientation"
+        },
+        "TextRecognition": {
+          "batch_size": 6,
+          "model_dir": null,
+          "model_name": "PP-OCRv6_small_rec",
+          "module_name": "text_recognition",
+          "score_thresh": 0.0
+        }
+      },
+      "SubPipelines": {
+        "DocPreprocessor": {
+          "SubModules": {
+            "DocOrientationClassify": {
+              "model_dir": null,
+              "model_name": "PP-LCNet_x1_0_doc_ori",
+              "module_name": "doc_text_orientation"
+            },
+            "DocUnwarping": {
+              "model_dir": null,
+              "model_name": "UVDoc",
+              "module_name": "image_unwarping"
+            }
+          },
+          "pipeline_name": "doc_preprocessor",
+          "use_doc_orientation_classify": false,
+          "use_doc_unwarping": false
+        }
+      },
+      "pipeline_name": "OCR",
+      "text_type": "general",
+      "use_doc_preprocessor": false,
+      "use_textline_orientation": true
+    },
+    "textline_orientation_model_name": "PP-LCNet_x1_0_textline_ori",
+    "versions": {
+      "paddle": "3.2.2",
+      "paddleocr": "3.7.0"
+    },
+    "model_files": {
+      "PP-OCRv6_small_det": {
+        "inference.json": 229307,
+        "inference.pdiparams": 9817888,
+        "inference.yml": 885,
+        "postprocess": "DBPostProcess",
+        "dictionary_length": 0,
+        "dictionary_has_chinese": false
+      },
+      "PP-OCRv6_small_rec": {
+        "inference.json": 208004,
+        "inference.pdiparams": 21074618,
+        "inference.yml": 150579,
+        "postprocess": "CTCLabelDecode",
+        "dictionary_length": 18708,
+        "dictionary_has_chinese": true
+      }
+    },
+    "warmup_frames": 7,
+    "rounds": 3,
+    "mean_ms": 204.2819599931439,
+    "median_ms": 202.59995199739933,
+    "p95_ms": 230.49544403329492,
+    "records": [
+      {
+        "round": 0,
+        "frame": 0,
+        "ms": 222.88340097293258,
+        "detection_count": 31,
+        "recognition_count": 31,
+        "texts": [
+          "雅",
+          "EA",
+          "YAL",
+          "二",
+          "4-1-",
+          "09/26",
+          "CEZE",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "不想再查取件码？",
+          "武国酒",
+          "收货密令】安全更方",
+          "回",
+          "快使用",
+          "09/26",
+          "6028",
+          "4-1.",
+          "水的",
+          "寄快通，就找菜鸟驿站",
+          "扫码可直接下单！",
+          "09/",
+          "4-1-",
+          "To",
+          "4",
+          "2:004",
+          "扫码可重接下单！",
+          "请快道，就找菜鸟驿站",
+          "快通",
+          "托码可直酒"
+        ],
+        "numeric_texts": [
+          "4-1-",
+          "09/26",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "09/26",
+          "6028",
+          "4-1.",
+          "09/",
+          "4-1-",
+          "4",
+          "2:004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 1,
+        "ms": 226.97207098826766,
+        "detection_count": 29,
+        "recognition_count": 29,
+        "texts": [
+          "6079",
+          "701",
+          "ILITH",
+          "EUIIFI",
+          "客通",
+          "7020",
+          "-1",
+          "CM",
+          "052",
+          "4时票营业",
+          "60084",
+          "6056",
+          "五晨",
+          "亿",
+          "电9",
+          "2015",
+          "wiallm",
+          "Mo",
+          "W841",
+          "4.1",
+          "15",
+          "2007",
+          "快递，新复鸟调运",
+          "2009",
+          "124",
+          "41",
+          "1快造 KEE",
+          "EE可IT",
+          ""
+        ],
+        "numeric_texts": [
+          "6079",
+          "701",
+          "7020",
+          "-1",
+          "052",
+          "60084",
+          "6056",
+          "2015",
+          "4.1",
+          "15",
+          "2007",
+          "2009",
+          "124",
+          "41"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 2,
+        "ms": 202.12178863584995,
+        "detection_count": 21,
+        "recognition_count": 21,
+        "texts": [
+          "7065",
+          "",
+          "7036",
+          "7034",
+          "7035",
+          "Patrad 53",
+          "SETTVE",
+          "钻",
+          "2078",
+          "",
+          "LFHEE",
+          "2036",
+          "2019",
+          "图",
+          "4",
+          "2023",
+          "2017",
+          "15 2100",
+          "P0FF1",
+          "11",
+          "BE"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7034",
+          "7035",
+          "2078",
+          "2036",
+          "2019",
+          "4",
+          "2023",
+          "2017",
+          "11"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 3,
+        "ms": 230.1816106773913,
+        "detection_count": 36,
+        "recognition_count": 36,
+        "texts": [
+          "",
+          "Muan   e",
+          "2036",
+          "1",
+          "山",
+          "04/00",
+          "HYIH",
+          "Yo   ",
+          "10",
+          "20339",
+          "00/00",
+          "HYAH",
+          "10INWUCA",
+          "4m加",
+          "",
+          "00/20",
+          "2019",
+          "2031",
+          "4.1",
+          "11",
+          "",
+          "快递：武问胎",
+          "扫间可直接下单！",
+          "2038",
+          "ANY",
+          "(L的加时",
+          "PAN ",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "4.1",
+          "11",
+          "141488",
+          "电N、M",
+          "V"
+        ],
+        "numeric_texts": [
+          "2036",
+          "1",
+          "04/00",
+          "10",
+          "20339",
+          "00/00",
+          "00/20",
+          "2019",
+          "2031",
+          "4.1",
+          "11",
+          "2038",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "4.1",
+          "11",
+          "141488"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 4,
+        "ms": 186.90716801211238,
+        "detection_count": 18,
+        "recognition_count": 18,
+        "texts": [
+          "1号三层机硬",
+          "2017",
+          "2",
+          "2023",
+          "41",
+          "1",
+          "S",
+          "1日1",
+          "LL",
+          "二娃",
+          "品",
+          "计",
+          "2010",
+          "",
+          "新鲜",
+          "私",
+          "008",
+          "11"
+        ],
+        "numeric_texts": [
+          "2017",
+          "2",
+          "2023",
+          "41",
+          "1",
+          "2010",
+          "008",
+          "11"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 5,
+        "ms": 171.42394557595253,
+        "detection_count": 7,
+        "recognition_count": 7,
+        "texts": [
+          "2004",
+          "中",
+          "MRUN",
+          "IXA",
+          "刻烫",
+          "N",
+          ""
+        ],
+        "numeric_texts": [
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 6,
+        "ms": 188.39013995602727,
+        "detection_count": 13,
+        "recognition_count": 13,
+        "texts": [
+          "Tin",
+          "1101",
+          "",
+          "M",
+          "",
+          "业",
+          "1094",
+          "SwwWWwWPI",
+          "104",
+          "7102",
+          "PIARSAAN",
+          "105",
+          "2"
+        ],
+        "numeric_texts": [
+          "1101",
+          "1094",
+          "104",
+          "7102",
+          "105",
+          "2"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 0,
+        "ms": 223.2269519008696,
+        "detection_count": 31,
+        "recognition_count": 31,
+        "texts": [
+          "雅",
+          "EA",
+          "YAL",
+          "二",
+          "4-1-",
+          "09/26",
+          "CEZE",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "不想再查取件码？",
+          "武国酒",
+          "收货密令】安全更方",
+          "回",
+          "快使用",
+          "09/26",
+          "6028",
+          "4-1.",
+          "水的",
+          "寄快通，就找菜鸟驿站",
+          "扫码可直接下单！",
+          "09/",
+          "4-1-",
+          "To",
+          "4",
+          "2:004",
+          "扫码可重接下单！",
+          "请快道，就找菜鸟驿站",
+          "快通",
+          "托码可直酒"
+        ],
+        "numeric_texts": [
+          "4-1-",
+          "09/26",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "09/26",
+          "6028",
+          "4-1.",
+          "09/",
+          "4-1-",
+          "4",
+          "2:004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 1,
+        "ms": 226.23316897079349,
+        "detection_count": 29,
+        "recognition_count": 29,
+        "texts": [
+          "6079",
+          "701",
+          "ILITH",
+          "EUIIFI",
+          "客通",
+          "7020",
+          "-1",
+          "CM",
+          "052",
+          "4时票营业",
+          "60084",
+          "6056",
+          "五晨",
+          "亿",
+          "电9",
+          "2015",
+          "wiallm",
+          "Mo",
+          "W841",
+          "4.1",
+          "15",
+          "2007",
+          "快递，新复鸟调运",
+          "2009",
+          "124",
+          "41",
+          "1快造 KEE",
+          "EE可IT",
+          ""
+        ],
+        "numeric_texts": [
+          "6079",
+          "701",
+          "7020",
+          "-1",
+          "052",
+          "60084",
+          "6056",
+          "2015",
+          "4.1",
+          "15",
+          "2007",
+          "2009",
+          "124",
+          "41"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 2,
+        "ms": 202.75579020380974,
+        "detection_count": 21,
+        "recognition_count": 21,
+        "texts": [
+          "7065",
+          "",
+          "7036",
+          "7034",
+          "7035",
+          "Patrad 53",
+          "SETTVE",
+          "钻",
+          "2078",
+          "",
+          "LFHEE",
+          "2036",
+          "2019",
+          "图",
+          "4",
+          "2023",
+          "2017",
+          "15 2100",
+          "P0FF1",
+          "11",
+          "BE"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7034",
+          "7035",
+          "2078",
+          "2036",
+          "2019",
+          "4",
+          "2023",
+          "2017",
+          "11"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 3,
+        "ms": 230.49544403329492,
+        "detection_count": 36,
+        "recognition_count": 36,
+        "texts": [
+          "",
+          "Muan   e",
+          "2036",
+          "1",
+          "山",
+          "04/00",
+          "HYIH",
+          "Yo   ",
+          "10",
+          "20339",
+          "00/00",
+          "HYAH",
+          "10INWUCA",
+          "4m加",
+          "",
+          "00/20",
+          "2019",
+          "2031",
+          "4.1",
+          "11",
+          "",
+          "快递：武问胎",
+          "扫间可直接下单！",
+          "2038",
+          "ANY",
+          "(L的加时",
+          "PAN ",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "4.1",
+          "11",
+          "141488",
+          "电N、M",
+          "V"
+        ],
+        "numeric_texts": [
+          "2036",
+          "1",
+          "04/00",
+          "10",
+          "20339",
+          "00/00",
+          "00/20",
+          "2019",
+          "2031",
+          "4.1",
+          "11",
+          "2038",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "4.1",
+          "11",
+          "141488"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 4,
+        "ms": 186.43766501918435,
+        "detection_count": 18,
+        "recognition_count": 18,
+        "texts": [
+          "1号三层机硬",
+          "2017",
+          "2",
+          "2023",
+          "41",
+          "1",
+          "S",
+          "1日1",
+          "LL",
+          "二娃",
+          "品",
+          "计",
+          "2010",
+          "",
+          "新鲜",
+          "私",
+          "008",
+          "11"
+        ],
+        "numeric_texts": [
+          "2017",
+          "2",
+          "2023",
+          "41",
+          "1",
+          "2010",
+          "008",
+          "11"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 5,
+        "ms": 172.3478976637125,
+        "detection_count": 7,
+        "recognition_count": 7,
+        "texts": [
+          "2004",
+          "中",
+          "MRUN",
+          "IXA",
+          "刻烫",
+          "N",
+          ""
+        ],
+        "numeric_texts": [
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 6,
+        "ms": 186.0274518840015,
+        "detection_count": 13,
+        "recognition_count": 13,
+        "texts": [
+          "Tin",
+          "1101",
+          "",
+          "M",
+          "",
+          "业",
+          "1094",
+          "SwwWWwWPI",
+          "104",
+          "7102",
+          "PIARSAAN",
+          "105",
+          "2"
+        ],
+        "numeric_texts": [
+          "1101",
+          "1094",
+          "104",
+          "7102",
+          "105",
+          "2"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 0,
+        "ms": 223.57315430417657,
+        "detection_count": 31,
+        "recognition_count": 31,
+        "texts": [
+          "雅",
+          "EA",
+          "YAL",
+          "二",
+          "4-1-",
+          "09/26",
+          "CEZE",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "不想再查取件码？",
+          "武国酒",
+          "收货密令】安全更方",
+          "回",
+          "快使用",
+          "09/26",
+          "6028",
+          "4-1.",
+          "水的",
+          "寄快通，就找菜鸟驿站",
+          "扫码可直接下单！",
+          "09/",
+          "4-1-",
+          "To",
+          "4",
+          "2:004",
+          "扫码可重接下单！",
+          "请快道，就找菜鸟驿站",
+          "快通",
+          "托码可直酒"
+        ],
+        "numeric_texts": [
+          "4-1-",
+          "09/26",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "09/26",
+          "6028",
+          "4-1.",
+          "09/",
+          "4-1-",
+          "4",
+          "2:004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 1,
+        "ms": 222.89582015946507,
+        "detection_count": 29,
+        "recognition_count": 29,
+        "texts": [
+          "6079",
+          "701",
+          "ILITH",
+          "EUIIFI",
+          "客通",
+          "7020",
+          "-1",
+          "CM",
+          "052",
+          "4时票营业",
+          "60084",
+          "6056",
+          "五晨",
+          "亿",
+          "电9",
+          "2015",
+          "wiallm",
+          "Mo",
+          "W841",
+          "4.1",
+          "15",
+          "2007",
+          "快递，新复鸟调运",
+          "2009",
+          "124",
+          "41",
+          "1快造 KEE",
+          "EE可IT",
+          ""
+        ],
+        "numeric_texts": [
+          "6079",
+          "701",
+          "7020",
+          "-1",
+          "052",
+          "60084",
+          "6056",
+          "2015",
+          "4.1",
+          "15",
+          "2007",
+          "2009",
+          "124",
+          "41"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 2,
+        "ms": 202.59995199739933,
+        "detection_count": 21,
+        "recognition_count": 21,
+        "texts": [
+          "7065",
+          "",
+          "7036",
+          "7034",
+          "7035",
+          "Patrad 53",
+          "SETTVE",
+          "钻",
+          "2078",
+          "",
+          "LFHEE",
+          "2036",
+          "2019",
+          "图",
+          "4",
+          "2023",
+          "2017",
+          "15 2100",
+          "P0FF1",
+          "11",
+          "BE"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7034",
+          "7035",
+          "2078",
+          "2036",
+          "2019",
+          "4",
+          "2023",
+          "2017",
+          "11"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 3,
+        "ms": 231.47143702954054,
+        "detection_count": 36,
+        "recognition_count": 36,
+        "texts": [
+          "",
+          "Muan   e",
+          "2036",
+          "1",
+          "山",
+          "04/00",
+          "HYIH",
+          "Yo   ",
+          "10",
+          "20339",
+          "00/00",
+          "HYAH",
+          "10INWUCA",
+          "4m加",
+          "",
+          "00/20",
+          "2019",
+          "2031",
+          "4.1",
+          "11",
+          "",
+          "快递：武问胎",
+          "扫间可直接下单！",
+          "2038",
+          "ANY",
+          "(L的加时",
+          "PAN ",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "4.1",
+          "11",
+          "141488",
+          "电N、M",
+          "V"
+        ],
+        "numeric_texts": [
+          "2036",
+          "1",
+          "04/00",
+          "10",
+          "20339",
+          "00/00",
+          "00/20",
+          "2019",
+          "2031",
+          "4.1",
+          "11",
+          "2038",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "4.1",
+          "11",
+          "141488"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 4,
+        "ms": 187.32252530753613,
+        "detection_count": 18,
+        "recognition_count": 18,
+        "texts": [
+          "1号三层机硬",
+          "2017",
+          "2",
+          "2023",
+          "41",
+          "1",
+          "S",
+          "1日1",
+          "LL",
+          "二娃",
+          "品",
+          "计",
+          "2010",
+          "",
+          "新鲜",
+          "私",
+          "008",
+          "11"
+        ],
+        "numeric_texts": [
+          "2017",
+          "2",
+          "2023",
+          "41",
+          "1",
+          "2010",
+          "008",
+          "11"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 5,
+        "ms": 176.29203340038657,
+        "detection_count": 7,
+        "recognition_count": 7,
+        "texts": [
+          "2004",
+          "中",
+          "MRUN",
+          "IXA",
+          "刻烫",
+          "N",
+          ""
+        ],
+        "numeric_texts": [
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 6,
+        "ms": 189.36174316331744,
+        "detection_count": 13,
+        "recognition_count": 13,
+        "texts": [
+          "Tin",
+          "1101",
+          "",
+          "M",
+          "",
+          "业",
+          "1094",
+          "SwwWWwWPI",
+          "104",
+          "7102",
+          "PIARSAAN",
+          "105",
+          "2"
+        ],
+        "numeric_texts": [
+          "1101",
+          "1094",
+          "104",
+          "7102",
+          "105",
+          "2"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      }
+    ],
+    "agreement_vs_v6_small_not_accuracy": [
+      {
+        "frame": 0,
+        "exact_text_list": true,
+        "numeric_multiset_overlap": 13,
+        "baseline_numeric_count": 13,
+        "current_numeric_count": 13
+      },
+      {
+        "frame": 1,
+        "exact_text_list": true,
+        "numeric_multiset_overlap": 14,
+        "baseline_numeric_count": 14,
+        "current_numeric_count": 14
+      },
+      {
+        "frame": 2,
+        "exact_text_list": true,
+        "numeric_multiset_overlap": 11,
+        "baseline_numeric_count": 11,
+        "current_numeric_count": 11
+      },
+      {
+        "frame": 3,
+        "exact_text_list": true,
+        "numeric_multiset_overlap": 19,
+        "baseline_numeric_count": 19,
+        "current_numeric_count": 19
+      },
+      {
+        "frame": 4,
+        "exact_text_list": true,
+        "numeric_multiset_overlap": 8,
+        "baseline_numeric_count": 8,
+        "current_numeric_count": 8
+      },
+      {
+        "frame": 5,
+        "exact_text_list": true,
+        "numeric_multiset_overlap": 1,
+        "baseline_numeric_count": 1,
+        "current_numeric_count": 1
+      },
+      {
+        "frame": 6,
+        "exact_text_list": true,
+        "numeric_multiset_overlap": 6,
+        "baseline_numeric_count": 6,
+        "current_numeric_count": 6
+      }
+    ]
+  },
+  "v6_medium": {
+    "model": "v6_medium",
+    "model_names": [
+      "PP-OCRv6_medium_det",
+      "PP-OCRv6_medium_rec"
+    ],
+    "settings": {
+      "device": "gpu:0",
+      "engine": "paddle_static",
+      "engine_config": {
+        "run_mode": "paddle"
+      },
+      "use_doc_orientation_classify": false,
+      "use_doc_unwarping": false,
+      "use_textline_orientation": true
+    },
+    "pipeline_config": {
+      "SubModules": {
+        "TextDetection": {
+          "box_thresh": 0.6,
+          "limit_side_len": 64,
+          "limit_type": "min",
+          "max_side_limit": 4000,
+          "model_dir": null,
+          "model_name": "PP-OCRv6_medium_det",
+          "module_name": "text_detection",
+          "thresh": 0.3,
+          "unclip_ratio": 1.5
+        },
+        "TextLineOrientation": {
+          "batch_size": 6,
+          "model_dir": null,
+          "model_name": "PP-LCNet_x1_0_textline_ori",
+          "module_name": "textline_orientation"
+        },
+        "TextRecognition": {
+          "batch_size": 6,
+          "model_dir": null,
+          "model_name": "PP-OCRv6_medium_rec",
+          "module_name": "text_recognition",
+          "score_thresh": 0.0
+        }
+      },
+      "SubPipelines": {
+        "DocPreprocessor": {
+          "SubModules": {
+            "DocOrientationClassify": {
+              "model_dir": null,
+              "model_name": "PP-LCNet_x1_0_doc_ori",
+              "module_name": "doc_text_orientation"
+            },
+            "DocUnwarping": {
+              "model_dir": null,
+              "model_name": "UVDoc",
+              "module_name": "image_unwarping"
+            }
+          },
+          "pipeline_name": "doc_preprocessor",
+          "use_doc_orientation_classify": false,
+          "use_doc_unwarping": false
+        }
+      },
+      "pipeline_name": "OCR",
+      "text_type": "general",
+      "use_doc_preprocessor": false,
+      "use_textline_orientation": true
+    },
+    "textline_orientation_model_name": "PP-LCNet_x1_0_textline_ori",
+    "versions": {
+      "paddle": "3.2.2",
+      "paddleocr": "3.7.0"
+    },
+    "model_files": {
+      "PP-OCRv6_medium_det": {
+        "README.md": 23247,
+        "inference.json": 312150,
+        "inference.pdiparams": 61960476,
+        "configuration.json": 71,
+        "inference.yml": 886,
+        ".gitattributes": 2132,
+        "postprocess": "DBPostProcess",
+        "dictionary_length": 0,
+        "dictionary_has_chinese": false
+      },
+      "PP-OCRv6_medium_rec": {
+        "README.md": 23474,
+        "inference.json": 221814,
+        "inference.pdiparams": 76465087,
+        "inference.yml": 150580,
+        ".gitattributes": 1575,
+        "postprocess": "CTCLabelDecode",
+        "dictionary_length": 18708,
+        "dictionary_has_chinese": true
+      }
+    },
+    "warmup_frames": 7,
+    "rounds": 3,
+    "mean_ms": 308.2176243797654,
+    "median_ms": 313.067012000829,
+    "p95_ms": 352.26147901266813,
+    "records": [
+      {
+        "round": 0,
+        "frame": 0,
+        "ms": 331.44683903083205,
+        "detection_count": 34,
+        "recognition_count": 34,
+        "texts": [
+          "阻费",
+          "AL",
+          "に",
+          "4-1-",
+          "09/26",
+          "OYIN",
+          "STLo",
+          "CE28",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "E",
+          "不想再查取件码？",
+          "快使用【收货密令】安全更方",
+          "日开",
+          "深",
+          "79143787197697",
+          "Ao",
+          "09/26",
+          "6028",
+          "4-1-",
+          "天堂即",
+          "客快递，就找菜鸟驿站",
+          "扫码可直接下单！",
+          "09/",
+          "4-1-",
+          "4-1-",
+          "09/29",
+          "2004",
+          "扫码可重播下单！",
+          "高快递，就拉菜鸟驿站",
+          "高快递",
+          "托码可直酒"
+        ],
+        "numeric_texts": [
+          "4-1-",
+          "09/26",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "79143787197697",
+          "09/26",
+          "6028",
+          "4-1-",
+          "09/",
+          "4-1-",
+          "4-1-",
+          "09/29",
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 1,
+        "ms": 356.78271017968655,
+        "detection_count": 40,
+        "recognition_count": 40,
+        "texts": [
+          "CULLID",
+          "6079",
+          "N",
+          "TF",
+          "X16I",
+          "7020",
+          "-17",
+          "C",
+          "",
+          "-1-1",
+          "UuN",
+          "FE103",
+          "052",
+          "9",
+          "TEU",
+          "6084",
+          "创基址码业",
+          "出",
+          "6056",
+          "井",
+          "LH匀功基新",
+          "外箱尺寸2",
+          "HEEE",
+          "veuM",
+          "手",
+          "2015",
+          "W0G01-021:01",
+          "D50004540",
+          "nnnsu",
+          "1.5",
+          "2007",
+          "终话，好汉级鸟锈话",
+          "四",
+          "2009",
+          "19/29",
+          "4-1",
+          "建快递：民市菜务局店",
+          "E品T直N下品",
+          "同价",
+          "抓"
+        ],
+        "numeric_texts": [
+          "6079",
+          "7020",
+          "-17",
+          "-1-1",
+          "052",
+          "9",
+          "6084",
+          "6056",
+          "2015",
+          "1.5",
+          "2007",
+          "2009",
+          "19/29",
+          "4-1"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 2,
+        "ms": 309.8077280446887,
+        "detection_count": 25,
+        "recognition_count": 25,
+        "texts": [
+          "7065",
+          "",
+          "7036",
+          "",
+          "7034",
+          "7035",
+          "4",
+          "FL2D",
+          "T",
+          "",
+          "日",
+          "1028",
+          "AD",
+          "0",
+          "",
+          "1H",
+          "2036",
+          "2019",
+          "2023",
+          "11号三层邮城",
+          "L",
+          "2",
+          "r",
+          "0",
+          "N"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7034",
+          "7035",
+          "4",
+          "1028",
+          "0",
+          "2036",
+          "2019",
+          "2023",
+          "2",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 3,
+        "ms": 326.8147180788219,
+        "detection_count": 35,
+        "recognition_count": 35,
+        "texts": [
+          "I3",
+          "ANE",
+          "e",
+          "2036",
+          "I",
+          "DE/0D",
+          "",
+          "2039",
+          "02/60",
+          "酒",
+          "1101xW0c2",
+          "Rh",
+          "",
+          "00/20",
+          "2019",
+          "2031",
+          "4-1",
+          "44.1",
+          "102/00",
+          "mn",
+          "更快递，武以国尚部站",
+          "仁0可直接下单！",
+          "",
+          "2038",
+          "",
+          "NEN",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "",
+          "448:0",
+          "2N2.N",
+          "EN与",
+          "3"
+        ],
+        "numeric_texts": [
+          "2036",
+          "2039",
+          "02/60",
+          "00/20",
+          "2019",
+          "2031",
+          "4-1",
+          "44.1",
+          "102/00",
+          "2038",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "448:0",
+          "3"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 4,
+        "ms": 298.2701868750155,
+        "detection_count": 22,
+        "recognition_count": 22,
+        "texts": [
+          "4020",
+          "1日",
+          "ETEL",
+          "2017",
+          "四2",
+          "三层超动",
+          "4",
+          "2023",
+          "47",
+          "12",
+          "L",
+          "1E",
+          "EL",
+          "同证",
+          "2010",
+          "47",
+          "云南",
+          "网",
+          "手祥",
+          "008",
+          "aeH",
+          "BHINTA"
+        ],
+        "numeric_texts": [
+          "4020",
+          "2017",
+          "4",
+          "2023",
+          "47",
+          "12",
+          "2010",
+          "47",
+          "008"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 5,
+        "ms": 247.9832279495895,
+        "detection_count": 4,
+        "recognition_count": 4,
+        "texts": [
+          "2004",
+          "MRUN",
+          "静",
+          "和"
+        ],
+        "numeric_texts": [
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 0,
+        "frame": 6,
+        "ms": 285.2361761033535,
+        "detection_count": 14,
+        "recognition_count": 14,
+        "texts": [
+          "1101",
+          "三出法中",
+          "",
+          "回",
+          "建",
+          "业正",
+          "a",
+          "PIA",
+          "1104",
+          "PYEUVIN",
+          "1105",
+          "0",
+          "1",
+          "图"
+        ],
+        "numeric_texts": [
+          "1101",
+          "1104",
+          "1105",
+          "0",
+          "1"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 0,
+        "ms": 327.40748999640346,
+        "detection_count": 34,
+        "recognition_count": 34,
+        "texts": [
+          "阻费",
+          "AL",
+          "に",
+          "4-1-",
+          "09/26",
+          "OYIN",
+          "STLo",
+          "CE28",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "E",
+          "不想再查取件码？",
+          "快使用【收货密令】安全更方",
+          "日开",
+          "深",
+          "79143787197697",
+          "Ao",
+          "09/26",
+          "6028",
+          "4-1-",
+          "天堂即",
+          "客快递，就找菜鸟驿站",
+          "扫码可直接下单！",
+          "09/",
+          "4-1-",
+          "4-1-",
+          "09/29",
+          "2004",
+          "扫码可重播下单！",
+          "高快递，就拉菜鸟驿站",
+          "高快递",
+          "托码可直酒"
+        ],
+        "numeric_texts": [
+          "4-1-",
+          "09/26",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "79143787197697",
+          "09/26",
+          "6028",
+          "4-1-",
+          "09/",
+          "4-1-",
+          "4-1-",
+          "09/29",
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 1,
+        "ms": 351.9531888887286,
+        "detection_count": 40,
+        "recognition_count": 40,
+        "texts": [
+          "CULLID",
+          "6079",
+          "N",
+          "TF",
+          "X16I",
+          "7020",
+          "-17",
+          "C",
+          "",
+          "-1-1",
+          "UuN",
+          "FE103",
+          "052",
+          "9",
+          "TEU",
+          "6084",
+          "创基址码业",
+          "出",
+          "6056",
+          "井",
+          "LH匀功基新",
+          "外箱尺寸2",
+          "HEEE",
+          "veuM",
+          "手",
+          "2015",
+          "W0G01-021:01",
+          "D50004540",
+          "nnnsu",
+          "1.5",
+          "2007",
+          "终话，好汉级鸟锈话",
+          "四",
+          "2009",
+          "19/29",
+          "4-1",
+          "建快递：民市菜务局店",
+          "E品T直N下品",
+          "同价",
+          "抓"
+        ],
+        "numeric_texts": [
+          "6079",
+          "7020",
+          "-17",
+          "-1-1",
+          "052",
+          "9",
+          "6084",
+          "6056",
+          "2015",
+          "1.5",
+          "2007",
+          "2009",
+          "19/29",
+          "4-1"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 2,
+        "ms": 320.71864884346724,
+        "detection_count": 25,
+        "recognition_count": 25,
+        "texts": [
+          "7065",
+          "",
+          "7036",
+          "",
+          "7034",
+          "7035",
+          "4",
+          "FL2D",
+          "T",
+          "",
+          "日",
+          "1028",
+          "AD",
+          "0",
+          "",
+          "1H",
+          "2036",
+          "2019",
+          "2023",
+          "11号三层邮城",
+          "L",
+          "2",
+          "r",
+          "0",
+          "N"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7034",
+          "7035",
+          "4",
+          "1028",
+          "0",
+          "2036",
+          "2019",
+          "2023",
+          "2",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 3,
+        "ms": 326.9519368186593,
+        "detection_count": 35,
+        "recognition_count": 35,
+        "texts": [
+          "I3",
+          "ANE",
+          "e",
+          "2036",
+          "I",
+          "DE/0D",
+          "",
+          "2039",
+          "02/60",
+          "酒",
+          "1101xW0c2",
+          "Rh",
+          "",
+          "00/20",
+          "2019",
+          "2031",
+          "4-1",
+          "44.1",
+          "102/00",
+          "mn",
+          "更快递，武以国尚部站",
+          "仁0可直接下单！",
+          "",
+          "2038",
+          "",
+          "NEN",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "",
+          "448:0",
+          "2N2.N",
+          "EN与",
+          "3"
+        ],
+        "numeric_texts": [
+          "2036",
+          "2039",
+          "02/60",
+          "00/20",
+          "2019",
+          "2031",
+          "4-1",
+          "44.1",
+          "102/00",
+          "2038",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "448:0",
+          "3"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 4,
+        "ms": 295.4176301136613,
+        "detection_count": 22,
+        "recognition_count": 22,
+        "texts": [
+          "4020",
+          "1日",
+          "ETEL",
+          "2017",
+          "四2",
+          "三层超动",
+          "4",
+          "2023",
+          "47",
+          "12",
+          "L",
+          "1E",
+          "EL",
+          "同证",
+          "2010",
+          "47",
+          "云南",
+          "网",
+          "手祥",
+          "008",
+          "aeH",
+          "BHINTA"
+        ],
+        "numeric_texts": [
+          "4020",
+          "2017",
+          "4",
+          "2023",
+          "47",
+          "12",
+          "2010",
+          "47",
+          "008"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 5,
+        "ms": 250.15292596071959,
+        "detection_count": 4,
+        "recognition_count": 4,
+        "texts": [
+          "2004",
+          "MRUN",
+          "静",
+          "和"
+        ],
+        "numeric_texts": [
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 1,
+        "frame": 6,
+        "ms": 286.302600055933,
+        "detection_count": 14,
+        "recognition_count": 14,
+        "texts": [
+          "1101",
+          "三出法中",
+          "",
+          "回",
+          "建",
+          "业正",
+          "a",
+          "PIA",
+          "1104",
+          "PYEUVIN",
+          "1105",
+          "0",
+          "1",
+          "图"
+        ],
+        "numeric_texts": [
+          "1101",
+          "1104",
+          "1105",
+          "0",
+          "1"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 0,
+        "ms": 330.15256375074387,
+        "detection_count": 34,
+        "recognition_count": 34,
+        "texts": [
+          "阻费",
+          "AL",
+          "に",
+          "4-1-",
+          "09/26",
+          "OYIN",
+          "STLo",
+          "CE28",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "E",
+          "不想再查取件码？",
+          "快使用【收货密令】安全更方",
+          "日开",
+          "深",
+          "79143787197697",
+          "Ao",
+          "09/26",
+          "6028",
+          "4-1-",
+          "天堂即",
+          "客快递，就找菜鸟驿站",
+          "扫码可直接下单！",
+          "09/",
+          "4-1-",
+          "4-1-",
+          "09/29",
+          "2004",
+          "扫码可重播下单！",
+          "高快递，就拉菜鸟驿站",
+          "高快递",
+          "托码可直酒"
+        ],
+        "numeric_texts": [
+          "4-1-",
+          "09/26",
+          "6052",
+          "09/26",
+          "6063",
+          "4-1-",
+          "79143787197697",
+          "09/26",
+          "6028",
+          "4-1-",
+          "09/",
+          "4-1-",
+          "4-1-",
+          "09/29",
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 1,
+        "ms": 352.26147901266813,
+        "detection_count": 40,
+        "recognition_count": 40,
+        "texts": [
+          "CULLID",
+          "6079",
+          "N",
+          "TF",
+          "X16I",
+          "7020",
+          "-17",
+          "C",
+          "",
+          "-1-1",
+          "UuN",
+          "FE103",
+          "052",
+          "9",
+          "TEU",
+          "6084",
+          "创基址码业",
+          "出",
+          "6056",
+          "井",
+          "LH匀功基新",
+          "外箱尺寸2",
+          "HEEE",
+          "veuM",
+          "手",
+          "2015",
+          "W0G01-021:01",
+          "D50004540",
+          "nnnsu",
+          "1.5",
+          "2007",
+          "终话，好汉级鸟锈话",
+          "四",
+          "2009",
+          "19/29",
+          "4-1",
+          "建快递：民市菜务局店",
+          "E品T直N下品",
+          "同价",
+          "抓"
+        ],
+        "numeric_texts": [
+          "6079",
+          "7020",
+          "-17",
+          "-1-1",
+          "052",
+          "9",
+          "6084",
+          "6056",
+          "2015",
+          "1.5",
+          "2007",
+          "2009",
+          "19/29",
+          "4-1"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 2,
+        "ms": 313.067012000829,
+        "detection_count": 25,
+        "recognition_count": 25,
+        "texts": [
+          "7065",
+          "",
+          "7036",
+          "",
+          "7034",
+          "7035",
+          "4",
+          "FL2D",
+          "T",
+          "",
+          "日",
+          "1028",
+          "AD",
+          "0",
+          "",
+          "1H",
+          "2036",
+          "2019",
+          "2023",
+          "11号三层邮城",
+          "L",
+          "2",
+          "r",
+          "0",
+          "N"
+        ],
+        "numeric_texts": [
+          "7065",
+          "7036",
+          "7034",
+          "7035",
+          "4",
+          "1028",
+          "0",
+          "2036",
+          "2019",
+          "2023",
+          "2",
+          "0"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 3,
+        "ms": 328.1605220399797,
+        "detection_count": 35,
+        "recognition_count": 35,
+        "texts": [
+          "I3",
+          "ANE",
+          "e",
+          "2036",
+          "I",
+          "DE/0D",
+          "",
+          "2039",
+          "02/60",
+          "酒",
+          "1101xW0c2",
+          "Rh",
+          "",
+          "00/20",
+          "2019",
+          "2031",
+          "4-1",
+          "44.1",
+          "102/00",
+          "mn",
+          "更快递，武以国尚部站",
+          "仁0可直接下单！",
+          "",
+          "2038",
+          "",
+          "NEN",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "",
+          "448:0",
+          "2N2.N",
+          "EN与",
+          "3"
+        ],
+        "numeric_texts": [
+          "2036",
+          "2039",
+          "02/60",
+          "00/20",
+          "2019",
+          "2031",
+          "4-1",
+          "44.1",
+          "102/00",
+          "2038",
+          "2029",
+          "2035",
+          "2016",
+          "2025",
+          "448:0",
+          "3"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 4,
+        "ms": 299.3411850184202,
+        "detection_count": 22,
+        "recognition_count": 22,
+        "texts": [
+          "4020",
+          "1日",
+          "ETEL",
+          "2017",
+          "四2",
+          "三层超动",
+          "4",
+          "2023",
+          "47",
+          "12",
+          "L",
+          "1E",
+          "EL",
+          "同证",
+          "2010",
+          "47",
+          "云南",
+          "网",
+          "手祥",
+          "008",
+          "aeH",
+          "BHINTA"
+        ],
+        "numeric_texts": [
+          "4020",
+          "2017",
+          "4",
+          "2023",
+          "47",
+          "12",
+          "2010",
+          "47",
+          "008"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 5,
+        "ms": 248.2721470296383,
+        "detection_count": 4,
+        "recognition_count": 4,
+        "texts": [
+          "2004",
+          "MRUN",
+          "静",
+          "和"
+        ],
+        "numeric_texts": [
+          "2004"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      },
+      {
+        "round": 2,
+        "frame": 6,
+        "ms": 286.06919618323445,
+        "detection_count": 14,
+        "recognition_count": 14,
+        "texts": [
+          "1101",
+          "三出法中",
+          "",
+          "回",
+          "建",
+          "业正",
+          "a",
+          "PIA",
+          "1104",
+          "PYEUVIN",
+          "1105",
+          "0",
+          "1",
+          "图"
+        ],
+        "numeric_texts": [
+          "1101",
+          "1104",
+          "1105",
+          "0",
+          "1"
+        ],
+        "effective_config": {
+          "model_settings": {
+            "use_doc_preprocessor": false,
+            "use_textline_orientation": true
+          },
+          "text_det_params": {
+            "limit_side_len": 64,
+            "limit_type": "min",
+            "thresh": 0.3,
+            "max_side_limit": 4000,
+            "box_thresh": 0.6,
+            "unclip_ratio": 1.5
+          },
+          "text_rec_score_thresh": 0.0
+        }
+      }
+    ],
+    "agreement_vs_v6_small_not_accuracy": [
+      {
+        "frame": 0,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 10,
+        "baseline_numeric_count": 13,
+        "current_numeric_count": 15
+      },
+      {
+        "frame": 1,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 7,
+        "baseline_numeric_count": 14,
+        "current_numeric_count": 14
+      },
+      {
+        "frame": 2,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 8,
+        "baseline_numeric_count": 11,
+        "current_numeric_count": 12
+      },
+      {
+        "frame": 3,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 9,
+        "baseline_numeric_count": 19,
+        "current_numeric_count": 16
+      },
+      {
+        "frame": 4,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 4,
+        "baseline_numeric_count": 8,
+        "current_numeric_count": 9
+      },
+      {
+        "frame": 5,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 1,
+        "baseline_numeric_count": 1,
+        "current_numeric_count": 1
+      },
+      {
+        "frame": 6,
+        "exact_text_list": false,
+        "numeric_multiset_overlap": 1,
+        "baseline_numeric_count": 6,
+        "current_numeric_count": 5
+      }
+    ]
+  }
+}

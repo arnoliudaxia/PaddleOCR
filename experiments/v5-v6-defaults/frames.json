@@ -1,0 +1,78 @@
+{
+  "video": "/home/arno/Projects/OCRPackages/images/VID20260929150008.mp4",
+  "fps": 60.009078680232584,
+  "frame_count": 401,
+  "selection": "7 integer linspace indices spanning the full video; not every second",
+  "frames": [
+    {
+      "file": "frame_0.png",
+      "index": 0,
+      "seconds": 0.0,
+      "shape": [
+        3840,
+        2160,
+        3
+      ]
+    },
+    {
+      "file": "frame_1.png",
+      "index": 66,
+      "seconds": 1.099833582709892,
+      "shape": [
+        3840,
+        2160,
+        3
+      ]
+    },
+    {
+      "file": "frame_2.png",
+      "index": 133,
+      "seconds": 2.2163313106123583,
+      "shape": [
+        3840,
+        2160,
+        3
+      ]
+    },
+    {
+      "file": "frame_3.png",
+      "index": 200,
+      "seconds": 3.332829038514824,
+      "shape": [
+        3840,
+        2160,
+        3
+      ]
+    },
+    {
+      "file": "frame_4.png",
+      "index": 266,
+      "seconds": 4.432662621224717,
+      "shape": [
+        3840,
+        2160,
+        3
+      ]
+    },
+    {
+      "file": "frame_5.png",
+      "index": 333,
+      "seconds": 5.549160349127182,
+      "shape": [
+        3840,
+        2160,
+        3
+      ]
+    },
+    {
+      "file": "frame_6.png",
+      "index": 400,
+      "seconds": 6.665658077029648,
+      "shape": [
+        3840,
+        2160,
+        3
+      ]
+    }
+  ]
+}

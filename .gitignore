@@ -11,6 +11,7 @@ models/
 models_fp16/
 output/
 output-*/
+output-benchmark/
 *.onnx
 *.pdiparams
 *.mp4
