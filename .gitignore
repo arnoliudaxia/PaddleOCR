@@ -1,0 +1,36 @@
+# Local environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.uv-cache/
+
+# Models and generated artifacts
+models/
+models_fp16/
+output/
+output-*/
+*.onnx
+*.pdiparams
+*.mp4
+*.log
+onnxruntime_profile*.json
+
+# Local inputs (provide your own images/videos)
+images/
+
+# Credentials and certificates
+.env
+.env.*
+!.env.example
+nginx/certs/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS/editor metadata
+.DS_Store
+.idea/
+.vscode/

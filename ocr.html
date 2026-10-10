@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>手机 OCR</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #111; color: #eee; font-family: system-ui, sans-serif; }
+    header { padding: 10px 14px; display: flex; gap: 10px; align-items: center; }
+    button { border: 0; border-radius: 6px; padding: 9px 14px; color: white; background: #1677ff; font-size: 16px; }
+    button:disabled { opacity: .5; }
+    #status { font-size: 13px; color: #bbb; }
+    #stage { position: relative; width: 100vw; line-height: 0; background: #000; overflow: hidden; }
+    #view { display: block; width: 100%; height: auto; }
+    #camera {
+      display: none;
+      position: absolute;
+      z-index: 2;
+      top: 12px;
+      left: 12px;
+      width: min(30vw, 240px);
+      height: auto;
+      border: 2px solid rgba(255,255,255,.9);
+      border-radius: 6px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.7);
+      background: #000;
+      cursor: move;
+      touch-action: none;
+      user-select: none;
+    }
+    #hint { padding: 10px 14px; color: #aaa; font-size: 13px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <header>
+    <button id="start">开启相机</button>
+    <select id="resolutionScale" style="padding:9px 6px;border:0;border-radius:6px;font-size:16px">
+      <option value="1">最大分辨率</option>
+      <option value="0.5">最大分辨率 1/2</option>
+      <option value="0.25">最大分辨率 1/4</option>
+    </select>
+    <input id="target" type="text" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="4位目标" style="width:82px;padding:9px 6px;border:0;border-radius:6px;font-size:16px">
+    <button id="setTarget" style="background:#555">设置寻找目标</button>
+    <input id="upload" type="file" accept="image/*" style="display:none">
+    <span id="resolution">分辨率：-</span>
+    <span id="status">尚未启动</span>
+  </header>
+  <div id="stage">
+    <video id="camera" autoplay playsinline muted></video>
+    <canvas id="view"></canvas>
+  </div>
+  <div style="padding:10px 14px">
+    <label for="upload" style="display:inline-block;background:#555;border-radius:6px;padding:9px 14px;font-size:16px;cursor:pointer">上传图片</label>
+  </div>
+  <div id="hint">每次 OCR 返回后才会提交下一帧。蓝色：四位数字；绿色：数字-数字；红色：其他数字/符号；灰色：其他文字区域。</div>
+
+<script>
+const camera = document.querySelector('#camera');
+const view = document.querySelector('#view');
+const ctx = view.getContext('2d');
+// 独立的隐藏采集画布，避免下一帧采集时擦掉主画面的 OCR 标注。
+const captureCanvas = document.createElement('canvas');
+const captureCtx = captureCanvas.getContext('2d');
+const startButton = document.querySelector('#start');
+const uploadInput = document.querySelector('#upload');
+const resolutionScale = document.querySelector('#resolutionScale');
+const targetInput = document.querySelector('#target');
+const setTargetButton = document.querySelector('#setTarget');
+const statusText = document.querySelector('#status');
+const resolutionText = document.querySelector('#resolution');
+let stream = null;
+let running = false;
+let busy = false;
+let nextTimer = null;
+let targetText = '';
+
+function status(text) { statusText.textContent = text; }
+
+let draggingPreview = false;
+let dragOffsetX = 0;
+let dragOffsetY = 0;
+
+camera.addEventListener('pointerdown', event => {
+  if (camera.style.display === 'none') return;
+  const stageRect = document.querySelector('#stage').getBoundingClientRect();
+  const cameraRect = camera.getBoundingClientRect();
+  draggingPreview = true;
+  dragOffsetX = event.clientX - cameraRect.left;
+  dragOffsetY = event.clientY - cameraRect.top;
+  camera.setPointerCapture(event.pointerId);
+  event.preventDefault();
+});
+
+camera.addEventListener('pointermove', event => {
+  if (!draggingPreview) return;
+  const stageRect = document.querySelector('#stage').getBoundingClientRect();
+  const maxX = Math.max(0, stageRect.width - camera.offsetWidth);
+  const maxY = Math.max(0, stageRect.height - camera.offsetHeight);
+  const x = Math.max(0, Math.min(maxX, event.clientX - stageRect.left - dragOffsetX));
+  const y = Math.max(0, Math.min(maxY, event.clientY - stageRect.top - dragOffsetY));
+  camera.style.left = `${x}px`;
+  camera.style.top = `${y}px`;
+  camera.style.right = 'auto';
+  camera.style.bottom = 'auto';
+  event.preventDefault();
+});
+
+function stopDraggingPreview(event) {
+  if (!draggingPreview) return;
+  draggingPreview = false;
+  if (event && camera.hasPointerCapture(event.pointerId)) camera.releasePointerCapture(event.pointerId);
+}
+
+camera.addEventListener('pointerup', stopDraggingPreview);
+camera.addEventListener('pointercancel', stopDraggingPreview);
+
+function polygonPath(points, sx, sy) {
+  ctx.beginPath();
+  points.forEach((p, i) => i ? ctx.lineTo(p[0] * sx, p[1] * sy) : ctx.moveTo(p[0] * sx, p[1] * sy));
+  ctx.closePath();
+}
+
+function drawResponse(data, highlightTarget = '') {
+  const sx = view.width / data.width;
+  const sy = view.height / data.height;
+  ctx.lineWidth = Math.max(2, view.width / 800);
+  ctx.font = `${Math.max(18, view.width / 45)}px sans-serif`;
+  for (const points of (data.other_boxes || [])) {
+    polygonPath(points, sx, sy);
+    ctx.strokeStyle = 'rgba(190,190,190,.75)';
+    ctx.stroke();
+  }
+  for (const item of (data.results || [])) {
+    polygonPath(item.polygon, sx, sy);
+    const four = /^\d{4}$/.test(item.text);
+    const hyphen = /^\d-\d/.test(item.text);
+    const isTarget = highlightTarget && item.text.trim() === highlightTarget;
+    const color = isTarget ? '#ff2020' : hyphen ? '#00b450' : four ? '#0070ff' : '#ff3030';
+    ctx.fillStyle = isTarget ? 'rgba(255, 0, 0, .45)' : hyphen ? 'rgba(0,140,65,.45)' : four ? 'rgba(0,90,220,.45)' : 'rgba(0,0,0,0)';
+    ctx.strokeStyle = color;
+    ctx.lineWidth = isTarget ? Math.max(5, view.width / 300) : Math.max(2, view.width / 800);
+    if (isTarget || hyphen || four) ctx.fill();
+    ctx.stroke();
+    const xs = item.polygon.map(p => p[0] * sx), ys = item.polygon.map(p => p[1] * sy);
+    const x = Math.max(0, Math.min(...xs));
+    const y = Math.max(0, Math.min(...ys) - parseInt(ctx.font, 10) - 5);
+    const metrics = ctx.measureText(item.text);
+    ctx.fillRect(x, y, metrics.width + 10, parseInt(ctx.font, 10) + 8);
+    ctx.fillStyle = '#fff';
+    ctx.fillText(item.text, x + 5, y + parseInt(ctx.font, 10) + 1);
+  }
+}
+
+function captureJpeg() {
+  return new Promise((resolve, reject) => captureCanvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('截图失败')), 'image/jpeg', .78));
+}
+
+async function submitImage(blob, sourceWidth, sourceHeight) {
+  busy = true;
+  try {
+    view.width = sourceWidth;
+    view.height = sourceHeight;
+    const bitmap = await createImageBitmap(blob, { imageOrientation: 'from-image' });
+    ctx.drawImage(bitmap, 0, 0, view.width, view.height);
+    // 通过 canvas 重编码，统一处理手机照片的 EXIF 方向，保证坐标方向一致。
+    const requestBlob = await new Promise((resolve, reject) =>
+      view.toBlob(value => value ? resolve(value) : reject(new Error('图片转换失败')), 'image/jpeg', .9));
+    const response = await fetch('/ocr', { method: 'POST', headers: { 'Content-Type': 'image/jpeg' }, body: requestBlob });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+    // 用原图重新绘制，确保上一帧的框不会残留。
+    ctx.drawImage(bitmap, 0, 0, view.width, view.height);
+    bitmap.close();
+    drawResponse(data);
+    status(`${data.results.length} 个数字/符号，${data.other_boxes.length} 个其他区域；${data.predict_ms} ms`);
+  } catch (error) {
+    status(`错误：${error.message}`);
+  } finally {
+    busy = false;
+  }
+}
+
+function scheduleFrame() {
+  if (!running || nextTimer !== null) return;
+  nextTimer = setTimeout(() => {
+    nextTimer = null;
+    submitFrame();
+  }, 0);
+}
+
+async function submitFrame() {
+  if (!running) return;
+  if (busy || !camera.videoWidth || !camera.videoHeight) {
+    scheduleFrame();
+    return;
+  }
+  busy = true;
+  try {
+    // 先把当前视频帧复制到 canvas；响应回来前不会再次提交。
+    captureCanvas.width = camera.videoWidth;
+    captureCanvas.height = camera.videoHeight;
+    captureCtx.drawImage(camera, 0, 0, captureCanvas.width, captureCanvas.height);
+    const response = await fetch('/ocr', { method: 'POST', headers: { 'Content-Type': 'image/jpeg' }, body: await captureJpeg() });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+    view.width = captureCanvas.width;
+    view.height = captureCanvas.height;
+    ctx.drawImage(captureCanvas, 0, 0, view.width, view.height);
+    drawResponse(data, targetText);
+    const matched = targetText && data.results.some(item => item.text.trim() === targetText);
+    if (matched) {
+      running = false;
+      if (nextTimer !== null) {
+        clearTimeout(nextTimer);
+        nextTimer = null;
+      }
+      camera.pause();
+      status(`已找到目标 ${targetText}，画面已冻结`);
+    } else {
+      status(`${data.results.length} 个数字/符号，${data.other_boxes.length} 个其他区域；${data.predict_ms} ms`);
+    }
+  } catch (error) {
+    status(`错误：${error.message}`);
+  } finally {
+    busy = false;
+    scheduleFrame();
+  }
+}
+
+async function requestMaximumResolution(mediaStream, scale) {
+  const track = mediaStream.getVideoTracks()[0];
+  const capabilities = track.getCapabilities();
+  const constraints = { resizeMode: 'none' };
+  if (capabilities.width?.max) constraints.width = { ideal: Math.round(capabilities.width.max * scale) };
+  if (capabilities.height?.max) constraints.height = { ideal: Math.round(capabilities.height.max * scale) };
+  if (capabilities.frameRate?.max) constraints.frameRate = { ideal: capabilities.frameRate.max };
+  try {
+    await track.applyConstraints(constraints);
+  } catch (error) {
+    console.warn('申请摄像头最大分辨率失败，继续使用当前分辨率：', error);
+  }
+  return track.getSettings();
+}
+
+setTargetButton.addEventListener('click', async () => {
+  const value = targetInput.value.trim();
+  if (!/^\d{4}$/.test(value)) {
+    status('请输入恰好 4 位数字');
+    targetInput.focus();
+    return;
+  }
+  targetText = value;
+  if (!stream) {
+    status(`目标已设置为 ${targetText}，请先开启相机`);
+    return;
+  }
+  running = true;
+  await camera.play();
+  status(`正在寻找目标 ${targetText}…`);
+  scheduleFrame();
+});
+
+function stopCamera() {
+  running = false;
+  camera.style.display = 'none';
+  if (nextTimer !== null) {
+    clearTimeout(nextTimer);
+    nextTimer = null;
+  }
+  stream?.getTracks().forEach(track => track.stop());
+  stream = null;
+  startButton.textContent = '开启相机';
+}
+
+uploadInput.addEventListener('change', async () => {
+  const file = uploadInput.files[0];
+  uploadInput.value = '';
+  if (!file) return;
+  if (busy) { status('上一帧仍在识别，请稍后再上传'); return; }
+  stopCamera();
+  const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+  const width = bitmap.width, height = bitmap.height;
+  bitmap.close();
+  resolutionText.textContent = `分辨率：${width}×${height}`;
+  status(`正在识别相册图片：${width}×${height}…`);
+  await submitImage(file, width, height);
+});
+
+startButton.addEventListener('click', async () => {
+  if (running) { stopCamera(); status('已停止'); return; }
+  try {
+    // 先打开摄像头，再读取 capabilities，并申请设备支持的最高视频模式。
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: 'environment' } },
+      audio: false
+    });
+    const settings = await requestMaximumResolution(stream, Number(resolutionScale.value));
+    camera.srcObject = stream;
+    await camera.play();
+    camera.style.display = 'block';
+    running = true;
+    startButton.textContent = '停止相机';
+    resolutionText.textContent = `分辨率：${settings.width}×${settings.height}`;
+    status('相机已开启，正在识别…');
+    scheduleFrame();
+  } catch (error) { status(`无法开启相机：${error.message}`); }
+});
+</script>
+</body>
+</html>

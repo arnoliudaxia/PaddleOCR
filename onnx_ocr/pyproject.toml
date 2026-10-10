@@ -1,0 +1,25 @@
+[project]
+name = "ppocr-onnx-runner"
+version = "0.2.0"
+requires-python = ">=3.11,<3.13"
+description = "Independent direct ONNX Runtime PP-OCRv6 pipeline"
+dependencies = [
+  "onnxruntime-gpu==1.23.2",
+  "opencv-contrib-python==4.10.0.84",
+  "numpy==2.3.5",
+  "pillow==12.3.0",
+  "huggingface-hub==2.2.0",
+  "pyyaml==6.0.2",
+  "pyclipper==1.4.0",
+]
+
+[project.optional-dependencies]
+cuda = [
+  "nvidia-cublas-cu12==12.9.2.10",
+  "nvidia-cuda-runtime-cu12==12.9.79",
+  "nvidia-cudnn-cu12==9.27.0.42",
+]
+conversion = ["onnx==1.23.2"]
+
+[tool.uv]
+package = false

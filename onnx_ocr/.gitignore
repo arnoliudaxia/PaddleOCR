@@ -1,0 +1,14 @@
+models/
+output/
+output-*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cache/
+.venv/
+venv/
+.env
+.env.*
+*token*
+*credentials*
+onnxruntime_profile*.json

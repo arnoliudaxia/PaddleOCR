@@ -1,0 +1,11 @@
+# Direct dependency pins only, NOT a transitive/resolved lockfile.
+# Replaced the historical PaddleOCR environment snapshot.
+onnxruntime-gpu==1.23.2
+opencv-contrib-python==4.10.0.84
+numpy==2.3.5
+pillow==12.3.0
+huggingface-hub==2.2.0
+pyyaml==6.0.2
+pyclipper==1.4.0
+# Optional FP16 conversion: onnx==1.23.2
+# Optional CUDA runtime libraries: use pyproject.toml cuda extra.

@@ -1,0 +1,11 @@
+This directory includes local adaptations of algorithm patterns from PaddleX
+3.7.2 text_detection/processors.py and text_recognition/processors.py.
+Copyright (c) 2024 PaddlePaddle Authors. All Rights Reserved.
+Original source licensed under the Apache License, Version 2.0.
+https://github.com/PaddlePaddle/PaddleX
+
+Adaptations: independent ONNX Runtime sessions, strict metadata loading,
+standalone NumPy/OpenCV DB/crop/CTC helpers and batching; no Paddle runtime imports.
+The accompanying LICENSE applies to the derived pipeline.py algorithm code.
+Official downloaded model weights/metadata remain subject to their repositories'
+own terms, and are not distributed here.
